@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { View, Text, TextInput, Image, StatusBar } from 'react-native';
+import { View, Text, TextInput, Image, } from 'react-native';
 
 import { styles } from './styles'
 
@@ -12,15 +12,15 @@ export function SingIn() {
 
     return (
         <View style={styles.container}>
-            <StatusBar barStyle='light-content' backgroundColor='transparent' translucent />
             <Image source={IllustrationImg} style={styles.image} resizeMode='stretch' />
 
             <View style={styles.content}>
                 <Text style={styles.title}>
 
-                    Organize {`\n`}
-                    suas jogatinas{`\n`}
-                    facilmente
+                    Conecte-se {`\n`}
+                    e organize suas {`\n`}
+                    jogatinas
+
                 </Text>
                 <Text style={styles.subtitle}>
                     Crie grupos para jogar seus games{`\n`}
