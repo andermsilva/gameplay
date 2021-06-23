@@ -31,6 +31,7 @@ export const styles = StyleSheet.create({
         fontSize: 15,
         textAlign: 'center',
         fontFamily: theme.fonts.text500,
+
     },
 
 });
