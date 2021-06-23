@@ -1,6 +1,6 @@
 import React from "react";
 
-import { View, ImageBackground, Text, FlatList } from 'react-native';
+import { View, ImageBackground, Text, FlatList, Modal } from 'react-native';
 import { Fontisto } from "@expo/vector-icons";
 
 import BannerImg from '../../assest/banner.png';
