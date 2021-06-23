@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { View, Text, TextInput, Image, } from 'react-native';
+import { View, Text, Image, } from 'react-native';
 
 import { styles } from './styles'
 
@@ -8,6 +8,7 @@ import IllustrationImg from '../../assest/illustration.png';
 
 import { ButtonIcon } from '../../components/ButtonIcon';
 import { useNavigation } from '@react-navigation/native';
+import { Background } from '../../components/Background';
 
 export function SingIn() {
     const navigation = useNavigation();
@@ -17,30 +18,33 @@ export function SingIn() {
     }
 
     return (
-        <View style={styles.container}>
-            <Image source={IllustrationImg} style={styles.image} resizeMode='stretch' />
+        <Background>
 
-            <View style={styles.content}>
-                <Text style={styles.title}>
+            <View style={styles.container}>
+                <Image source={IllustrationImg} style={styles.image} resizeMode='stretch' />
 
-                    Conecte-se {`\n`}
-                    e organize suas {`\n`}
-                    jogatinas
+                <View style={styles.content}>
+                    <Text style={styles.title}>
 
-                </Text>
-                <Text style={styles.subtitle}>
-                    Crie grupos para jogar seus games{`\n`}
-                    favoritos com seus amigos
-                </Text>
-                <ButtonIcon
-                    title='Entrar com Discord'
+                        Conecte-se {`\n`}
+                        e organize suas {`\n`}
+                        jogatinas
 
-                    onPress={handleSinIng}
+                    </Text>
+                    <Text style={styles.subtitle}>
+                        Crie grupos para jogar seus games{`\n`}
+                        favoritos com seus amigos
+                    </Text>
+                    <ButtonIcon
+                        title='Entrar com Discord'
 
-                />
+                        onPress={handleSinIng}
+
+                    />
+                </View>
+
             </View>
 
-        </View>
-
+        </Background>
     );
 }
