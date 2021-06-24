@@ -29,6 +29,42 @@ export function Guilds({ handleGuildSelect }: Props) {
             nome: 'Fortinaite',
             icon: 'Image.png',
             owner: true
+        },
+        {
+            id: '3',
+            nome: 'Lendarios',
+            icon: 'Image.png',
+            owner: true
+        },
+        {
+            id: '4',
+            nome: 'Fortinaite',
+            icon: 'Image.png',
+            owner: true
+        },
+        {
+            id: '5',
+            nome: 'Lendarios',
+            icon: 'Image.png',
+            owner: true
+        },
+        {
+            id: '6',
+            nome: 'Fortinaite',
+            icon: 'Image.png',
+            owner: true
+        },
+        {
+            id: '7',
+            nome: 'Lendarios',
+            icon: 'Image.png',
+            owner: true
+        },
+        {
+            id: '8',
+            nome: 'Fortinaite',
+            icon: 'Image.png',
+            owner: true
         }
     ]
     return (
@@ -43,7 +79,10 @@ export function Guilds({ handleGuildSelect }: Props) {
                     />
                 )}
                 showsVerticalScrollIndicator={false}
-                ItemSeparatorComponent={() => <ListDivider />}
+                ItemSeparatorComponent={() => <ListDivider isCentered />}
+                ListHeaderComponent={() => <ListDivider isCentered />}
+                contentContainerStyle={{ paddingBottom: 68, paddingTop: 103 }}
+
                 style={styles.guilds}
             />
         </View>
