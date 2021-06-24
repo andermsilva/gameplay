@@ -8,7 +8,7 @@ import BannerImg from '../../assest/banner.png';
 import { Background } from "../../components/Background";
 import { Header } from "../../components/Header";
 import { ListHeader } from "../../components/ListHeader";
-import { Members } from "../../components/Appointment/Member";
+import { Members } from "../../components/Member";
 import { ListDivider } from "../../components/ListDivider";
 import { ButtonIcon } from "../../components/ButtonIcon";
 

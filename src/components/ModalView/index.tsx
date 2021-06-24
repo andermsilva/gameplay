@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 
-import { Modal, View, Text, ModalProps, TouchableWithoutFeedback } from 'react-native'
+import { Modal, View, ModalProps, TouchableWithoutFeedback } from 'react-native'
 
 import { Background } from "../Background";
 

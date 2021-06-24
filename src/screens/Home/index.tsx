@@ -28,7 +28,7 @@ export function Home() {
 
             guild: {
                 id: '1',
-                name: 'Lendário',
+                nome: 'Lendário',
                 icon: null,
                 owner: true
             },
@@ -42,7 +42,7 @@ export function Home() {
 
             guild: {
                 id: '1',
-                name: 'Lendário',
+                nome: 'Lendário',
                 icon: null,
                 owner: true
             },
@@ -56,7 +56,7 @@ export function Home() {
 
             guild: {
                 id: '1',
-                name: 'Lendário',
+                nome: 'Lendário',
                 icon: null,
                 owner: true
             },
@@ -70,7 +70,7 @@ export function Home() {
 
             guild: {
                 id: '1',
-                name: 'Lendário',
+                nome: 'Lendário',
                 icon: null,
                 owner: true
             },
@@ -79,48 +79,7 @@ export function Home() {
             date: '22/06 às 20:40h',
             descripiton: 'É hoje que vamos chegar ao challenger sem perder um partida da md10'
         },
-        {
-            id: '5',
 
-            guild: {
-                id: '1',
-                name: 'Lendário',
-                icon: null,
-                owner: true
-            },
-
-            category: '1',
-            date: '22/06 às 20:40h',
-            descripiton: 'É hoje que vamos chegar ao challenger sem perder um partida da md10'
-        },
-        {
-            id: '6',
-
-            guild: {
-                id: '1',
-                name: 'Lendário',
-                icon: null,
-                owner: true
-            },
-
-            category: '1',
-            date: '22/06 às 20:40h',
-            descripiton: 'É hoje que vamos chegar ao challenger sem perder um partida da md10'
-        },
-        {
-            id: '7',
-
-            guild: {
-                id: '1',
-                name: 'Lendário',
-                icon: null,
-                owner: true
-            },
-
-            category: '1',
-            date: '22/06 às 20:40h',
-            descripiton: 'É hoje que vamos chegar ao challenger sem perder um partida da md10'
-        }
 
     ]
 

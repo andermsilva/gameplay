@@ -10,7 +10,7 @@ import { styles } from './styles';
 import { theme } from "../../global/styles/theme";
 
 
-export type GuildPrpps = {
+export type GuildProps = {
     id: string;
     nome: string;
     icon: string | null;
@@ -18,7 +18,7 @@ export type GuildPrpps = {
 }
 
 type Props = TouchableOpacityProps & {
-    data: GuildPrpps;
+    data: GuildProps;
 }
 
 export function Guild({ data, ...rest }: Props) {

@@ -1,19 +1,14 @@
 import React from 'react';
 
-import { View, Text, Image, FlatList } from 'react-native';
+import { View, FlatList } from 'react-native';
 
 import { styles } from './styles'
 
-import IllustrationImg from '../../assest/illustration.png';
-
-import { ButtonIcon } from '../../components/ButtonIcon';
-import { useNavigation } from '@react-navigation/native';
-import { Background } from '../../components/Background';
 import { ListDivider } from '../../components/ListDivider';
-import { Guild, GuildPrpps } from '../../components/Guild';
+import { Guild, GuildProps } from '../../components/Guild';
 
 type Props = {
-    handleGuildSelect: (guild: GuildPrpps) => void;
+    handleGuildSelect: (guild: GuildProps) => void;
 }
 
 export function Guilds({ handleGuildSelect }: Props) {
