@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View, Text, Image, Alert } from 'react-native';
+import { View, Text, Image, Alert, ActivityIndicator } from 'react-native';
 
 import { styles } from './styles'
 
@@ -10,11 +10,12 @@ import { ButtonIcon } from '../../components/ButtonIcon';
 import { useNavigation } from '@react-navigation/native';
 import { Background } from '../../components/Background';
 
-import { useAuth } from '../../hooks/auth';
+import { userAuth } from '../../hooks/auth';
+import { theme } from '../../global/styles/theme';
 
 export function SingIn() {
 
-    const { user, sinIng } = useAuth();
+    const { loading, sinIng } = userAuth();
 
     async function handleSinIng() {
 
@@ -47,12 +48,15 @@ export function SingIn() {
                         Crie grupos para jogar seus games{`\n`}
                         favoritos com seus amigos
                     </Text>
-                    <ButtonIcon
-                        title='Entrar com Discord'
+                    {loading ? <ActivityIndicator color={theme.colors.primary} />
 
-                        onPress={handleSinIng}
+                        : <ButtonIcon
+                            title='Entrar com Discord'
 
-                    />
+                            onPress={handleSinIng}
+
+                        />
+                    }
                 </View>
 
             </View>

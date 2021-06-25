@@ -21,10 +21,7 @@ export function AuthRoutes() {
                 }
             }}
         >
-            <Screen
-                name='Singin'
-                component={SingIn}
-            />
+
             <Screen
                 name='Home'
                 component={Home}
