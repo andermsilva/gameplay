@@ -2,7 +2,7 @@ import React from "react";
 
 import { NavigationContainer } from '@react-navigation/native';
 
-import { AuthRoutes } from './auth.routes';
+import { AppRoutes } from './app.routes';
 
 import { SingIn } from "../screens/Singin";
 
@@ -14,7 +14,7 @@ export function Routes() {
         <NavigationContainer>
             {user.id ?
 
-                <AuthRoutes />
+                <AppRoutes />
                 :
                 <SingIn />
             }

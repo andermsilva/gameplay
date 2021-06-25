@@ -1,17 +1,15 @@
 import React from 'react';
-
 import { View, Text, Image, Alert, ActivityIndicator } from 'react-native';
-
-import { styles } from './styles'
 
 import IllustrationImg from '../../assest/illustration.png';
 
+import { theme } from '../../global/styles/theme';
+import { styles } from './styles'
+
 import { ButtonIcon } from '../../components/ButtonIcon';
-import { useNavigation } from '@react-navigation/native';
 import { Background } from '../../components/Background';
 
 import { userAuth } from '../../hooks/auth';
-import { theme } from '../../global/styles/theme';
 
 export function SingIn() {
 
