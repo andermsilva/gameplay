@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View, Text, Image, } from 'react-native';
+import { View, Text, Image, Alert } from 'react-native';
 
 import { styles } from './styles'
 
@@ -13,14 +13,20 @@ import { Background } from '../../components/Background';
 import { useAuth } from '../../hooks/auth';
 
 export function SingIn() {
-    const navigation = useNavigation();
-    const { user } = useAuth();
+
+    const { user, sinIng } = useAuth();
+
+    async function handleSinIng() {
+
+        try {
+
+            await sinIng();
 
 
+        } catch (error) {
+            Alert.alert(error)
+        }
 
-
-    function handleSinIng() {
-        navigation.navigate('Home')
     }
 
     return (
