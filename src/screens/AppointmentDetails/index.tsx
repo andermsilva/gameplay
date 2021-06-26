@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import { View, ImageBackground, Text, FlatList, Alert } from 'react-native';
+import { View, ImageBackground, Text, FlatList, Alert, Share, Platform } from 'react-native';
+
+import { BorderlessButton } from 'react-native-gesture-handler';
+import { useNavigation, useRoute } from "@react-navigation/native";
+
 import { Fontisto } from "@expo/vector-icons";
 
 import BannerImg from '../../assest/banner.png';
@@ -15,12 +19,12 @@ import { ButtonIcon } from "../../components/ButtonIcon";
 import { Load } from "../../components/Load";
 
 
-import { BorderlessButton } from 'react-native-gesture-handler';
 import { theme } from "../../global/styles/theme";
 import { styles } from './styles';
-import { useRoute } from "@react-navigation/native";
 import { AppointmentProps } from "../../components/Appointment";
 import { api } from "../../services/api";
+
+import * as Linking from 'expo-linking';
 
 
 
@@ -36,6 +40,7 @@ type GuildWidGet = {
 }
 
 export function AppointmentDetails() {
+    const navigation = useNavigation();
 
     const [widget, setWidget] = useState<GuildWidGet>({} as GuildWidGet);
 
@@ -48,7 +53,10 @@ export function AppointmentDetails() {
             setWidget(response.data);
             setLoading(false);
         } catch (error) {
-            Alert.alert('Verifique as configurações do servidor. Será que o Widget está habilitado?')
+            Alert.alert('Verifique as configurações do servidor. Será que o Widget está habilitado?');
+
+
+
         } finally {
             setLoading(false);
         }
@@ -57,22 +65,23 @@ export function AppointmentDetails() {
 
     const route = useRoute();
     const { guildSelected } = route.params as Params;
-    /* 
-        const members = [
-            {
-                id: '1',
-                username: 'Andeson',
-                avatar_url: 'https://github.com/andermsilva.png',
-                status: 'online'
-            },
-            {
-                id: '2',
-                username: 'Anderson',
-                avatar_url: 'https://github.com/andermsilva.png',
-                status: 'offline'
-            }
-        ];
-     */
+
+    function handleShereEniation() {
+        const message = Platform.OS === 'ios'
+            ? `Junte - se a ${guildSelected.guild.name}`
+            : widget.instant_invite;
+
+        Share.share({
+            message,
+            url: widget.instant_invite
+
+        });
+
+    }
+
+    function handleOpenGild() {
+        Linking.openURL(widget.instant_invite);
+    }
 
     useEffect(() => {
         fetchGuilWidget();
@@ -83,7 +92,8 @@ export function AppointmentDetails() {
             <Header
                 title='Detalhes'
                 action={
-                    <BorderlessButton>
+                    guildSelected.guild.owner &&
+                    <BorderlessButton onPress={handleShereEniation}>
                         <Fontisto
                             name='share'
                             size={24}
@@ -112,7 +122,11 @@ export function AppointmentDetails() {
 
                         <ListHeader
                             title='Jogadores'
+
+
+
                             subtitle={`Total ${widget.members.length}`}
+
                         />
 
                         <FlatList
@@ -130,11 +144,17 @@ export function AppointmentDetails() {
                         />
                     </>
             }
-            <View style={styles.footer}>
-                <ButtonIcon title='Entrar na partida' />
+            {
+                guildSelected.guild.owner &&
 
-            </View>
+                <View style={styles.footer}>
+                    <ButtonIcon
+                        title='Entrar na partida'
+                        onPress={handleOpenGild}
+                    />
 
+                </View>
+            }
         </Background>
     );
 }
