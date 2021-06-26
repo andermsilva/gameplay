@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import * as AuthSession from 'expo-auth-session';
 
-import { COLLECTION_USERS, COLLECTION_APPOINTMENT } from '../configs/database'
+import { COLLECTION_USERS, COLLECTION_APPOINTMENTS } from '../configs/database'
 
 const { SCOPE } = process.env
 const { CLIENT_ID } = process.env
@@ -12,10 +12,7 @@ const { CDN_IMAGE } = process.env
 const { REDIRECT_URI } = process.env
 const { RESPONSE_TYPE } = process.env
 
-console.log(RESPONSE_TYPE, SCOPE, REDIRECT_URI, CLIENT_ID)
-
 import { api } from "../services/api";
-import { async } from "q";
 
 type User = {
     id: string;
@@ -57,9 +54,6 @@ function Authprovider({ children }: AuthProviderProps) {
             setLoading(true);
 
             const authUrl = `${api.defaults.baseURL}/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
-
-            //const response = await AuthSession.startAsync({ authUrl })
-
             const { type, params } = await AuthSession.startAsync({ authUrl }) as AuthorizationResponse;
 
             if (type === "success" && !params.error) {
@@ -70,16 +64,15 @@ function Authprovider({ children }: AuthProviderProps) {
 
                 const firstName = userInfo.data.username.split(' ')[0];
 
+                userInfo.data.avatar = `${CDN_IMAGE}/avatars/${userInfo.data.id}/${userInfo.data.avatar}.png`
+
                 const userData = {
                     ...userInfo.data,
                     firstName,
                     token: params.access_token
                 }
-
-                userInfo.data.avatar = `${CDN_IMAGE}/avatars/${userInfo.data.id}/${userInfo.data.avatar}.png`
                 await AsyncStorage.setItem(COLLECTION_USERS, JSON.stringify(userData))
                 setUser(userData);
-
             }
 
         } catch {

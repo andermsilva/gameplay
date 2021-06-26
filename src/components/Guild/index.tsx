@@ -12,7 +12,7 @@ import { theme } from "../../global/styles/theme";
 
 export type GuildProps = {
     id: string;
-    nome: string;
+    name: string;
     icon: string | null;
     owner: boolean;
 }
@@ -29,11 +29,14 @@ export function Guild({ data, ...rest }: Props) {
             activeOpacity={0.7}
             {...rest}
         >
-            <GuildIcon />
+            <GuildIcon
+                guildId={data.id}
+                iconId={data.icon}
+            />
             <View style={styles.content}>
                 <View>
                     <Text style={styles.title}>
-                        {data.nome}
+                        {data.name}
 
                     </Text>
                     <Text style={styles.type}>

@@ -6,6 +6,7 @@ import { theme } from "../../global/styles/theme";
 import { RectButton, RectButtonProps } from "react-native-gesture-handler";
 
 import { categories } from "../../utils/categories";
+
 import { GuildIcon } from "../GuildIcon";
 import { GuildProps } from "../Guild";
 
@@ -23,7 +24,7 @@ export type AppointmentProps = {
     guild: GuildProps;
     category: string;
     date: string;
-    descripiton: string;
+    description: string;
 
 
 }
@@ -32,9 +33,15 @@ type Props = RectButtonProps & {
 }
 
 export function Appointment({ data, ...rest }: Props) {
+
+
+
     const [category] = categories.filter(item => item.id === data.category);
+
     const { owner } = data.guild;
     const { primary, on, secondary50, secondary70 } = theme.colors;
+
+
     return (
         <RectButton {...rest}>
             <View style={styles.container}>
@@ -43,19 +50,20 @@ export function Appointment({ data, ...rest }: Props) {
                     colors={[secondary50, secondary70]}
                 >
 
-                    <GuildIcon />
+                    <GuildIcon guildId={data.guild.id} iconId={data.guild.icon} />
                 </LinearGradient>
 
 
                 <View style={styles.content}>
                     <View style={styles.header}>
                         <Text style={styles.title}>
-                            {data.guild.nome}
+                            {data.guild.name}
                         </Text>
 
                         <Text style={styles.category}>
                             {category.title}
                         </Text>
+
                     </View>
 
                     <View style={styles.footer}>

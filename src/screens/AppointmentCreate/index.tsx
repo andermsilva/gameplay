@@ -2,23 +2,35 @@ import React, { useState } from "react";
 
 import { View, Platform, Text, KeyboardAvoidingView, ScrollView } from 'react-native';
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import uuid from 'react-native-uuid'
+
+
+
 import { Feather } from "@expo/vector-icons";
 import { RectButton } from 'react-native-gesture-handler';
+import { useNavigation } from "@react-navigation/native";
+
+import { Header } from "../../components/Header";
+
+import { COLLECTION_APPOINTMENTS } from '../../configs/database'
 
 import { Guilds } from "../Guilds";
-import { Header } from "../../components/Header";
-import { CategorySelect } from "../../components/CategorySelect";
 import { GuildIcon } from "../../components/GuildIcon";
-import { Textarea } from "../../components/Textearea";
-import { Background } from "../../components/Background";
+import { GuildProps } from "../../components/Guild";
 
+import { CategorySelect } from "../../components/CategorySelect";
+
+import { Background } from "../../components/Background";
 import { Button } from "../../components/Button";
 import { SmallInput } from "../../components/SmallInut";
+import { Textarea } from "../../components/Textearea";
 
-import { styles } from "./styles";
-import { theme } from "../../global/styles/theme";
 import { ModalView } from "../../components/ModalView";
-import { GuildProps } from "../../components/Guild";
+
+import { theme } from "../../global/styles/theme";
+import { styles } from "./styles";
 
 
 
@@ -26,7 +38,15 @@ import { GuildProps } from "../../components/Guild";
 export function AppointmentCreate() {
     const [category, setCategory] = useState('');
     const [openGuildsModal, setOpenGuildsModal] = useState(false);
-    const [guild, setGuid] = useState<GuildProps>({} as GuildProps)
+    const [guild, setGuid] = useState<GuildProps>({} as GuildProps);
+
+    const [day, setDay] = useState('');
+    const [month, setMonth] = useState('');
+    const [hour, setHour] = useState('');
+    const [minute, setMinute] = useState('');
+    const [description, setDescription] = useState('');
+
+    const navegation = useNavigation();
 
 
     function handleCategorySelect(categoryId: string) {
@@ -45,10 +65,32 @@ export function AppointmentCreate() {
         setOpenGuildsModal(false);
     }
 
+
+    async function handleSalve() {
+        const newAppointment = {
+            id: uuid.v4(),
+            guild,
+            category,
+            date: `${day}/${month} às ${hour}:${minute}h`,
+            description: description
+        }
+
+        const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS);
+        const appointment = storage ? JSON.parse(storage) : [];
+
+        await AsyncStorage.setItem(
+            COLLECTION_APPOINTMENTS,
+            JSON.stringify([...appointment, newAppointment])
+        );
+        navegation.navigate('Home')
+    }
+
     return (
+
         <KeyboardAvoidingView
             behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-            style={styles.container}>
+            style={styles.container}
+        >
             <Background>
 
                 <ScrollView>
@@ -75,7 +117,11 @@ export function AppointmentCreate() {
                             <View style={styles.select}>
                                 {
                                     guild.icon ?
-                                        <GuildIcon />
+                                        <GuildIcon
+
+                                            guildId={guild.id}
+                                            iconId={guild.icon}
+                                        />
                                         :
                                         <View style={styles.image} />
 
@@ -83,7 +129,7 @@ export function AppointmentCreate() {
                                 <View style={styles.selectBody}>
                                     <Text style={styles.label}>
                                         {
-                                            guild.nome ? guild.nome : '  selecione um servidor'
+                                            guild.name ? guild.name : '  selecione um servidor'
                                         }
 
                                     </Text>
@@ -107,11 +153,19 @@ export function AppointmentCreate() {
 
                                 <View style={styles.colunm}>
 
-                                    <SmallInput maxLength={2} />
+                                    <SmallInput
+                                        maxLength={2}
+                                        onChangeText={setDay}
+
+                                    />
 
                                     <Text style={styles.divider}>/</Text>
 
-                                    <SmallInput maxLength={2} />
+                                    <SmallInput
+                                        maxLength={2}
+                                        onChangeText={setMonth}
+
+                                    />
 
                                 </View>
                             </View>
@@ -123,11 +177,17 @@ export function AppointmentCreate() {
 
                                 <View style={styles.colunm}>
 
-                                    <SmallInput maxLength={2} />
+                                    <SmallInput
+                                        maxLength={2}
+                                        onChangeText={setHour}
+                                    />
 
                                     <Text style={styles.divider}>:</Text>
 
-                                    <SmallInput maxLength={2} />
+                                    <SmallInput
+                                        maxLength={2}
+                                        onChangeText={setMinute}
+                                    />
 
                                 </View>
                             </View>
@@ -143,11 +203,15 @@ export function AppointmentCreate() {
                             maxLength={100}
                             numberOfLines={5}
                             autoCorrect={false}
+                            onChangeText={setDescription}
 
                         />
 
                         <View style={styles.footer}>
-                            <Button title='Agendar' />
+                            <Button
+                                title='Agendar'
+                                onPress={handleSalve}
+                            />
                         </View>
                     </View>
                 </ScrollView>
